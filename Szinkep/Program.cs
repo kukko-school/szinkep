@@ -18,7 +18,7 @@ namespace Szinkep
         static void Main(string[] args)
         {
             pixels = new Pixel[height, width];
-            string[] rows = File.ReadAllLines("kep.txt");
+            string[] rows = File.ReadAllLines("../../kep.txt");
             for (int y = 0; y < height; y++)
             {
                 for (int x = 0; x < width; x++)
@@ -33,9 +33,9 @@ namespace Szinkep
             PrintNumberOfOccurencesOfPixel(35, 8);
             Console.WriteLine("4. feladat");
             PrintMostCommonBaseColor();
-            WriteBitmapToFile(GenerateBitmapFromPixels(pixels), "eredeti.bmp");
+            WriteBitmapToFile(GenerateBitmapFromPixels(pixels), "../../eredeti.bmp");
             AddFrameToImage(3, new Pixel(0, 0, 0));
-            WriteBitmapToFile(GenerateBitmapFromPixels(pixels), "keretes.bmp");
+            WriteBitmapToFile(GenerateBitmapFromPixels(pixels), "../../keretes.bmp");
             Console.ReadKey();
         }
 
