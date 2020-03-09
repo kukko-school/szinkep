@@ -36,6 +36,8 @@ namespace Szinkep
             WriteBitmapToFile(GenerateBitmapFromPixels(pixels), "../../eredeti.bmp");
             AddFrameToImage(3, new Pixel(0, 0, 0));
             WriteBitmapToFile(GenerateBitmapFromPixels(pixels), "../../keretes.bmp");
+            WritePixelsToFile(pixels, "../../keretes.txt");
+            PrintAreaOfRectangleOfColor(pixels, new Pixel(255, 255, 0));
             Console.ReadKey();
         }
 
@@ -149,6 +151,55 @@ namespace Szinkep
                     }
                 }
             }
+        }
+
+        private static void WritePixelsToFile(Pixel[,] pixels, string filename)
+        {
+            List<string> lines = new List<string>();
+            for (int y = 0; y < pixels.GetLength(0); y++)
+            {
+                for (int x = 0; x < pixels.GetLength(1); x++)
+                {
+                    lines.Add(String.Join(" ", new string[] { pixels[y, x].GetR().ToString(), pixels[y, x].GetG().ToString(), pixels[y, x].GetB().ToString() }));
+                }
+            }
+            File.WriteAllLines(filename, lines);
+        }
+
+        private static void PrintAreaOfRectangleOfColor(Pixel[,] pixels, Pixel pixel)
+        {
+            int? startX = null;
+            int? startY = null;
+            int? endX = null;
+            int? endY = null;
+            for (int y = 0; y < pixels.GetLength(0); y++)
+            {
+                for (int x = 0; x < pixels.GetLength(1); x++)
+                {
+                    if (pixels[y, x].Equals(pixel))
+                    {
+                        if (startX == null || x < startX)
+                        {
+                            startX = x;
+                        }
+                        if (startY == null || y < startY)
+                        {
+                            startY = y;
+                        }
+                        if (endX == null || x > endX)
+                        {
+                            endX = x;
+                        }
+                        if (endY == null || y > endY)
+                        {
+                            endY = y;
+                        }
+                    }
+                }
+            }
+            Console.WriteLine("Kezd: " + startY + ", " + startX);
+            Console.WriteLine("Vége: " + endY + ", " + endX);
+            Console.WriteLine("Képpontok száma: " + ((endX.Value - startX.Value + 1) * (endY.Value - startY.Value + 1)));
         }
     }
 }
