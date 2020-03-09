@@ -24,7 +24,7 @@ namespace Szinkep
                 for (int x = 0; x < width; x++)
                 {
                     string[] colors = rows[y * 50 + x].Split(' ');
-                    pixels[y, x] = new Pixel(int.Parse(colors[0]), int.Parse(colors[1]), int.Parse(colors[2]));
+                    pixels[x, y] = new Pixel(int.Parse(colors[0]), int.Parse(colors[1]), int.Parse(colors[2]));
                 }
             }
             Console.WriteLine("2. feladat");
